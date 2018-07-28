@@ -37,7 +37,8 @@ INSTALLED_APPS = [
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
-    'web'
+    'web',
+    'django_celery_results',
 ]
 
 MIDDLEWARE = [
@@ -127,6 +128,7 @@ CELERY_BROKER_URL = BROKER_URL
 CELERY_ACCEPT_CONTENT = ['json']
 CELERY_TASK_SERIALIZER = 'json'
 CELERY_RESULT_SERIALIZER = 'json'
+CELERY_RESULT_BACKEND = 'django-db'
 CELERY_BEAT_SCHEDULE = {
 
     'task-cron': {
