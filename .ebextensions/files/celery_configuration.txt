@@ -58,7 +58,7 @@ environment=$celeryenv"
 #; so it starts first
 #priority=998
 
-environment=$celeryenv"
+#environment=$celeryenv"
 
 # Create the celery supervisord conf script
 echo "$celeryconf" | tee /opt/python/etc/celery.conf
