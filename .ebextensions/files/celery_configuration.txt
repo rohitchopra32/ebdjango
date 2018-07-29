@@ -7,7 +7,7 @@ celeryenv=${celeryenv%?}
 # Create celery configuraiton script
 celeryconf="[program:celery]
 ; Set full path to celery program if using virtualenv
-command=/opt/python/run/venv/bin/celery -A ebdjango worker --loglevel=INFO -B -S django
+command=/opt/python/run/venv/bin/celery -A ebdjango worker --loglevel=INFO -B -S django --workdir=/tmp -S django --pidfile /tmp/celerybeat.pid
 
 directory=/opt/python/current/app
 user=nobody
