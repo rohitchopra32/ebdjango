@@ -130,7 +130,7 @@ CELERY_BROKER_URL = BROKER_URL
 CELERY_ACCEPT_CONTENT = ['json']
 CELERY_TASK_SERIALIZER = 'json'
 CELERY_RESULT_SERIALIZER = 'json'
-CELERY_RESULT_BACKEND = 'django-db'
+#CELERY_RESULT_BACKEND = 'django-db'
 CELERY_TIMEZONE = 'UTC'
 CELERY_ENABLE_UTC = True
 # CELERY_BEAT_SCHEDULE = {
@@ -141,3 +141,12 @@ CELERY_ENABLE_UTC = True
 #         'args': (16,16)
 #     },
 # }
+
+#EMAIL
+NOTIFY_EMAILS = [] # To Which You Want To Send Mail
+EMAIL_HOST = '' # Mailing Server
+EMAIL_PORT = 587 # Port
+EMAIL_HOST_USER = '' # Send Email From
+EMAIL_HOST_PASSWORD = '' # Password
+EMAIL_USE_TLS = True
+
