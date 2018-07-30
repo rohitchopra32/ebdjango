@@ -1,0 +1,24 @@
+{% load static %}
+<!DOCTYPE html>
+<html>
+<head>
+	<title>Progress Bar</title>
+	<script src="{% static 'celery_progress/celery_progress.js' %}"></script>
+	<script
+		src="https://code.jquery.com/jquery-3.3.1.min.js"
+		integrity="sha256-FgpCb/KJQlLNfOu91ta32o/NMZxltwRo8QtmkMRdAu8="
+		crossorigin="anonymous"></script>
+</head>
+<body>
+	<div class='progress-wrapper'>
+		<div id='progress-bar' class='progress-bar' style="background-color: #68a9ef; width: 0%;">&nbsp;</div>
+	</div>
+	<div id="progress-bar-message">Waiting for progress to start...</div>
+	<script type="text/javascript">
+		var progressUrl = "{% url 'celery_progress:task_status' task_id %}";
+			$(function () {
+				CeleryProgressBar.initProgressBar(progressUrl)
+			});
+	</script>
+</body>
+</html>
