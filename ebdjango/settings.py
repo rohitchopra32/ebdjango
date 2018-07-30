@@ -40,6 +40,7 @@ INSTALLED_APPS = [
     'web',
     'django_celery_beat',
     'django_celery_results',
+    'celery_progress',
 ]
 
 MIDDLEWARE = [
