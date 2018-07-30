@@ -11,11 +11,12 @@ def demotask(self, x, y):
     for i in range(1,10):
         self.update_state(state='PROGRESS',meta={'current': i, 'total': 10, 'status': "Ok"})
         time.sleep(1)
-        send_mail(
-            'Subject here',
-            'Here is the message.',
-            settings.EMAIL_HOST_USER,
-            ['rohitchopra32@gmail.com'],
-            fail_silently=False,
-        )
+        if settings.NOTIFY_EMAILS and settings.EMAIL_HOST_USER:
+            send_mail(
+                'Subject here',
+                'Here is the message.',
+                settings.EMAIL_HOST_USER,
+                settings.NOTIFY_EMAILS,
+                fail_silently=False,
+            )
     return {'current': 10, 'total': 10, 'status': 'SUCCESS','result': 42}

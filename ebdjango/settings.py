@@ -143,8 +143,9 @@ CELERY_BEAT_SCHEDULE = {
 
 
 #EMAIL
-EMAIL_HOST = 'server136.web-hosting.com'
-EMAIL_PORT = 587
-EMAIL_HOST_USER = 'recovery@liteum.io'
-EMAIL_HOST_PASSWORD = 'liteum1.'
+NOTIFY_EMAILS = [] # To Which You Want To Send Mail
+EMAIL_HOST = '' # Mailing Server
+EMAIL_PORT = 587 # Port
+EMAIL_HOST_USER = '' # Send Email From
+EMAIL_HOST_PASSWORD = '' # Password
 EMAIL_USE_TLS = True
