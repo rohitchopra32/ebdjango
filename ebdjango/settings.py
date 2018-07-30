@@ -140,3 +140,11 @@ CELERY_BEAT_SCHEDULE = {
         'args': (16,16)
     },
 }
+
+
+#EMAIL
+EMAIL_HOST = 'server136.web-hosting.com'
+EMAIL_PORT = 587
+EMAIL_HOST_USER = 'recovery@liteum.io'
+EMAIL_HOST_PASSWORD = 'liteum1.'
+EMAIL_USE_TLS = True

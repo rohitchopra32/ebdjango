@@ -1,4 +1,6 @@
 from ebdjango.celery import app
+from django.core.mail import send_mail
+from django.conf import settings
 import time
 
 @app.task(bind=True)
@@ -9,4 +11,11 @@ def demotask(self, x, y):
     for i in range(1,10):
         self.update_state(state='PROGRESS',meta={'current': i, 'total': 10, 'status': "Ok"})
         time.sleep(1)
+        send_mail(
+            'Subject here',
+            'Here is the message.',
+            settings.EMAIL_HOST_USER,
+            ['rohitchopra32@gmail.com'],
+            fail_silently=False,
+        )
     return {'current': 10, 'total': 10, 'status': 'SUCCESS','result': 42}
