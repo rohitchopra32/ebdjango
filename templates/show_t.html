@@ -85,8 +85,12 @@
             csrfmiddlewaretoken: "{{csrf_token}}",
         },
         success: function(result) {
+          if (result === "PENDING"){
+                  document.getElementById("user-count").textContent="PENDING";
+               return;
+          }
           var percent = 100;
-          console.log(result.process_percent);
+          console.log(result.process_percent, result, typeof(result));
                     if (result.process_percent == null || result.process_percent == undefined) {
                         willstop = 1;
                         document.getElementById("user-count").textContent="DONE";

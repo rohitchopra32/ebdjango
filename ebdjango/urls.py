@@ -20,6 +20,6 @@ from web.views import progress_view, poll_state
 urlpatterns = [
     path('admin/', admin.site.urls),
     path('celery-progress/', include('celery_progress.urls')),
-    path('progress_view/', progress_view),
+    path('progress_view/', progress_view, name = 'progress_view'),
     path('poll_state/', poll_state, name='poll_state'),
 ]

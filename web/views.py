@@ -1,8 +1,9 @@
 from django.shortcuts import render
+from django.urls import reverse
 from django.http import HttpResponse, HttpResponseRedirect
-
+from .forms import *
 from celery.result import AsyncResult
-from web.tasks import demotask
+from web.tasks import *
 import json
 import traceback
 # Create your views here.
@@ -21,6 +22,7 @@ def poll_state(request):
     try:
         data = 'Fail'
         if request.is_ajax():
+            print(request.POST)
             if 'task_id' in request.POST.keys() and request.POST['task_id']:
                 task_id = request.POST['task_id']
                 task = AsyncResult(task_id)
@@ -36,6 +38,7 @@ def poll_state(request):
         traceback.print_exc()
         return render(request,"display_progress.html", context={})
 
+
 def progress_view(request):
     print(request.GET, request.POST)
     if 'job' in request.GET:
@@ -46,10 +49,14 @@ def progress_view(request):
             'data':data,
             'task_id':job_id,
         }
-        return render(request,"show_t.html",context=context)
+        return render(request,"show_t.html",context)
+    elif 'n' in request.GET:
+        n = request.GET['n']
+        job = fft_random.delay(int(n))
+        return HttpResponseRedirect(reverse('progress_view') + '?job=' + job.id)
     else:
-        print("in views")
-        result = demotask.delay(10, 10)
-        context ={'task_id': result.task_id}
-        print(context)
-        return render(request,"display_progress.html",context=context)
+        form = UserForm()
+        context = {
+            'form':form,
+        }
+        return render(request,"post_form.html",context)
