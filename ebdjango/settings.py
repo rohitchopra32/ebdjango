@@ -58,7 +58,7 @@ ROOT_URLCONF = 'ebdjango.urls'
 TEMPLATES = [
     {
         'BACKEND': 'django.template.backends.django.DjangoTemplates',
-        'DIRS': [],
+        'DIRS': [os.path.join(BASE_DIR, 'templates')],
         'APP_DIRS': True,
         'OPTIONS': {
             'context_processors': [
@@ -125,23 +125,27 @@ STATIC_URL = '/static/'
 STATIC_ROOT = 'static'
 
 #CELERY SETTINGS
+#BROKER_URL = 'redis://127.0.0.1:6379'
 BROKER_URL = 'redis://testing.1sceuo.ng.0001.aps1.cache.amazonaws.com:6379/'
 CELERY_BROKER_URL = BROKER_URL
 CELERY_ACCEPT_CONTENT = ['json']
 CELERY_TASK_SERIALIZER = 'json'
 CELERY_RESULT_SERIALIZER = 'json'
+CELERY_RESULT_BACKEND='redis'
+CELERY_REDIS_HOST='testing.1sceuo.ng.0001.aps1.cache.amazonaws.com' 
+CELERY_REDIS_PORT=6379
+CELERY_REDIS_DB = 0
 #CELERY_RESULT_BACKEND = 'django-db'
 CELERY_TIMEZONE = 'UTC'
 CELERY_ENABLE_UTC = True
-CELERY_BEAT_SCHEDULE = {
+# CELERY_BEAT_SCHEDULE = {
 
-    'task-cron': {
-        'task': 'web.tasks.demotask',
-        'schedule': crontab(minute='*/1'),# every 10 minutes
-        'args': (16,16)
-    },
-}
-
+#     'task-cron': {
+#         'task': 'web.tasks.demotask',
+#         'schedule': crontab(minute='*/10'),# every 10 minutes
+#         'args': (16,16)
+#     },
+# }
 
 #EMAIL
 NOTIFY_EMAILS = [] # To Which You Want To Send Mail
@@ -150,3 +154,4 @@ EMAIL_PORT = 587 # Port
 EMAIL_HOST_USER = '' # Send Email From
 EMAIL_HOST_PASSWORD = '' # Password
 EMAIL_USE_TLS = True
+
