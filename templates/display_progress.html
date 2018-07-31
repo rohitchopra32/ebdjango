@@ -8,7 +8,7 @@
 		src="https://code.jquery.com/jquery-3.3.1.min.js"
 		integrity="sha256-FgpCb/KJQlLNfOu91ta32o/NMZxltwRo8QtmkMRdAu8="
 		crossorigin="anonymous"></script>
-		<style type="text/css">
+	<style type="text/css">
 			.hidden{
 				visibility: hidden;
 			}
@@ -18,18 +18,21 @@
 	<div class='progress-wrapper'>
 		<div id='progress-bar' class='progress-bar' style="background-color: #68a9ef; width: 0%;">&nbsp;</div>
 	</div>
-	<div id="progress-bar-message" class="hidden">Waiting for progress to start...</div>
-	<button id="button" onclick="">start task</button>
+	<div id="progress-bar-message">Waiting for progress to start...</div>
+	<button id="button">start task</button>
 	<script type="text/javascript">
-		function(){
-			$('#button').attr('style', 'display : None');
-			$('#button').attr('style', 'visibility : visible');
-			$('.hidden').css('visibility', 'visible')
-			var progressUrl = "{% url 'celery_progress:task_status' task_id %}";
-				$(function () {
-					CeleryProgressBar.initProgressBar(progressUrl)
-				});
-		}
+		$("button").click(function(){
+			var hostname = window.location.hostname;
+			window.location.assign('?job={{ task_id}}')
+			// $('#button').attr('style', 'display : None');
+			// $('#button').attr('style', 'visibility : visible');
+			// $('.hidden').css('visibility', 'visible')
+			// var progressUrl = "{% url 'celery_progress:task_status' task_id %}";
+			// 	$(function () {
+			// 		CeleryProgressBar.initProgressBar(progressUrl)
+			// 	});
+
+		});
 	</script>
 </body>
 </html>

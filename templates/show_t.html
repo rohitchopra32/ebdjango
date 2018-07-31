@@ -1,0 +1,118 @@
+<!DOCTYPE html>
+<html class="no-js">
+  <head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+    <title>nanobar.js</title>
+    <meta name="description" content="nanobar.js - Very very lightweight progress bars">
+    <style>
+      * {
+        margin:10px 0px;
+        padding:10px 0px;
+      }
+      .container {
+        margin:20 auto;
+        max-width: 72em;
+      }
+      #color, #centered {
+        padding: 1em;
+        background: #fff;
+        float: left;
+        width: 50%;
+        box-sizing: border-box;
+      }
+      #color .nanobar, #centered .nanobar {
+        margin-bottom: 2em;
+      }
+      #color .nanobar .bar {
+        background: #38f;
+        border-radius: 4px;
+        box-shadow: 0 0 10px #59d;
+        height: 6px;
+        margin: 15px auto;
+      }
+      #centered .nanobar .bar {
+        background: url('img/rainbow.gif') 100%;
+        height: 9px;
+      }
+    </style>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.2.2/jquery.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/nanobar/0.4.2/nanobar.min.js"></script>
+  </head>
+
+<body>
+
+  <div class="container">
+    <p>
+      Your Task is <span id="user-count"></span>!
+    </p>
+    <input id="returnBtn" type=button value="Previous Page" style="visibility:hidden; margin-top:10px;"onClick="javascript:history.go(-1);">
+  </div>
+
+
+
+<!-- <div class="status"></div>
+   {% if task_id %}
+   <div class="progress">
+    <div class="bar" id="bar"></div>
+   </div>
+   {% endif %}
+</div> -->
+
+
+
+
+<script type="text/javascript">
+   var poll_xhr;
+   var willstop = 0;
+   
+  (function(){
+    var poll = function(){
+    var simplebar = new Nanobar();
+      
+      var json_dump = "{{ data }}";
+      var task_id = "{{task_id}}";
+      // var options = {
+      //   target: document.getElementById('bar')
+      // };
+      // var nanobar = new Nanobar( options );
+      console.log(task_id);
+      poll_xhr = $.ajax({
+        url:'/poll_state/',
+        type: 'POST',
+        data: {
+            task_id: task_id,
+            csrfmiddlewaretoken: "{{csrf_token}}",
+        },
+        success: function(result) {
+          var percent = 100;
+          console.log(result.process_percent);
+                    if (result.process_percent == null || result.process_percent == undefined) {
+                        willstop = 1;
+                        document.getElementById("user-count").textContent="DONE";
+                        document.getElementById('returnBtn').style.visibility = 'visible';
+                        // simplebar.go(100);
+                        var x = document.getElementsByClassName('bar');
+                        for (i = 0; i < x.length; i++) {
+                          x[i].style.width = "100%";
+                        }
+                        console.log('in done');
+                       } else {
+                        simplebar.go(result.process_percent);
+                        console.log('in pending');
+                        document.getElementById("user-count").textContent=result.process_percent + "% PROCRESSING";
+                       };
+                    }
+      });
+    };
+    var refreshIntervalId = setInterval(function() {
+      if(willstop == 1){
+        clearInterval(refreshIntervalId);
+      } else{
+        poll();
+      }
+    },500);
+  })();
+</script>
+</body>
+</html>

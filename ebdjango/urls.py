@@ -15,10 +15,11 @@ Including another URLconf
 """
 from django.contrib import admin
 from django.urls import path, include
-from web.views import progress_view
+from web.views import progress_view, poll_state
 
 urlpatterns = [
     path('admin/', admin.site.urls),
     path('celery-progress/', include('celery_progress.urls')),
-    path('progress_view/', progress_view)
+    path('progress_view/', progress_view),
+    path('poll_state/', poll_state, name='poll_state'),
 ]

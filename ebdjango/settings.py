@@ -125,11 +125,17 @@ STATIC_URL = '/static/'
 STATIC_ROOT = 'static'
 
 #CELERY SETTINGS
-BROKER_URL = 'redis://127.0.0.1:6379'#'testing.1sceuo.ng.0001.aps1.cache.amazonaws.com:6379/'
+# BROKER_URL = 'redis://127.0.0.1:6379'
+BROKER_URL = 'redis://testing.1sceuo.ng.0001.aps1.cache.amazonaws.com:6379/'
 CELERY_BROKER_URL = BROKER_URL
 CELERY_ACCEPT_CONTENT = ['json']
 CELERY_TASK_SERIALIZER = 'json'
 CELERY_RESULT_SERIALIZER = 'json'
+CELERY_RESULT_BACKEND='redis'
+CELERY_REDIS_HOST = 'testing.1sceuo.ng.0001.aps1.cache.amazonaws.com'
+# CELERY_REDIS_HOST = '127.0.0.1'
+CELERY_REDIS_PORT=6379
+CELERY_REDIS_DB = 0
 #CELERY_RESULT_BACKEND = 'django-db'
 CELERY_TIMEZONE = 'UTC'
 CELERY_ENABLE_UTC = True

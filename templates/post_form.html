@@ -1,0 +1,24 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title>Form</title>
+	<style type="text/css">
+		body{
+			margin: 10 auto;
+			padding: 10px;
+		}
+		form{
+			margin: 0 auto;
+		}
+	</style>
+</head>
+<body>
+	<h1>Form</h1>
+	<form class="" action="" >
+		{%csrf_token%}
+		{{ form.as_p }}
+		<input type="submit" name="name" value="submit">
+	</form>
+
+</body>
+</html>
