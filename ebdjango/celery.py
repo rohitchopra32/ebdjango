@@ -6,7 +6,7 @@ os.environ.setdefault('DJANGO_SETTINGS_MODULE', 'ebdjango.settings')
 app = Celery('ebdjango')
 
 app.config_from_object('django.conf:settings', namespace="CELERY")
-app.conf.broker_url = 'redis://testing.1sceuo.ng.0001.aps1.cache.amazonaws.com:6379/0'
+app.conf.broker_url = 'Your Redis Cluster URL'
 app.autodiscover_tasks()
 
 
